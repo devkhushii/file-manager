@@ -7,15 +7,12 @@ app = Flask(__name__)
 UPLOAD_FOLDER = './uploads'
 if not os.path.exists(UPLOAD_FOLDER):
     os.makedirs(UPLOAD_FOLDER)
-    
-    
-
+       
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 app.config['SECRET_KEY']='this-is-api-key'
 
-
-
 @app.route("/",methods=["GET","POST"])
+@app.route("/home",methods=["GET","POST"])
 def home():
   
     if request.method=='POST':
@@ -30,7 +27,6 @@ def home():
             file.save(filepath)
             return jsonify({"message": "File uploaded successfully", "file": filename})
         
-    
     return render_template('index.html')
 
 if __name__ == '__main__':
